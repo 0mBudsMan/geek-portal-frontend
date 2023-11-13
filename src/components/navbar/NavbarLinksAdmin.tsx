@@ -287,14 +287,7 @@ export default function HeaderLinks(props: { secondary: boolean }) {
             >
               <Text fontSize="sm">Profile Settings</Text>
             </MenuItem>
-            <MenuItem
-              _hover={{ bg: 'none' }}
-              _focus={{ bg: 'none' }}
-              borderRadius="8px"
-              px="14px"
-            >
-              <Text fontSize="sm">Newsletter Settings</Text>
-            </MenuItem>
+           
             <MenuItem
               _hover={{ bg: 'none' }}
               _focus={{ bg: 'none' }}
@@ -302,7 +295,7 @@ export default function HeaderLinks(props: { secondary: boolean }) {
               borderRadius="8px"
               px="14px"
             >
-              <Text fontSize="sm">Log out</Text>
+             <Link href='/auth/sign-in'>  <Text fontSize="sm">Log out</Text></Link>
             </MenuItem>
           </Flex>
         </MenuList>

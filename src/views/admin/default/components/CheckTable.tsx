@@ -40,7 +40,7 @@ export default function CheckTable(props: { tableData: any }) {
 					align='center'
 					fontSize={{ sm: '10px', lg: '12px' }}
 					color='gray.400'>
-					NAME
+					Name
 				</Text>
 			),
 			cell: (info: any) => (
@@ -60,7 +60,7 @@ export default function CheckTable(props: { tableData: any }) {
 					align='center'
 					fontSize={{ sm: '10px', lg: '12px' }}
 					color='gray.400'>
-					PROGRESS
+					GITHUB ID
 				</Text>
 			),
 			cell: (info) => (
@@ -77,7 +77,7 @@ export default function CheckTable(props: { tableData: any }) {
 					align='center'
 					fontSize={{ sm: '10px', lg: '12px' }}
 					color='gray.400'>
-					QUANTITY
+					PR MERGED
 				</Text>
 			),
 			cell: (info) => (
@@ -94,7 +94,7 @@ export default function CheckTable(props: { tableData: any }) {
 					align='center'
 					fontSize={{ sm: '10px', lg: '12px' }}
 					color='gray.400'>
-					DATE
+					TOTAL POINTS
 				</Text>
 			),
 			cell: (info) => (

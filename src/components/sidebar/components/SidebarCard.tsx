@@ -50,7 +50,7 @@ export default function SidebarDocs() {
           px="10px"
           mb="14px"
         >
-          Upgrade to PRO
+          OpenCode'23
         </Text>
         <Text
           fontSize="14px"
@@ -59,8 +59,7 @@ export default function SidebarDocs() {
           mb="14px"
           textAlign="center"
         >
-          Improve your development process and start doing more with Horizon UI
-          PRO!
+         Start your Open Source Contribution journey from here! at IIIT Allahabad
         </Text>
       </Flex>
       <Link href="https://horizon-ui.com/pro">
@@ -74,8 +73,7 @@ export default function SidebarDocs() {
           fontSize="sm"
           minW="185px"
           mx="auto"
-        >
-          Upgrade to PRO
+        > Register Now
         </Button>
       </Link>
     </Flex>

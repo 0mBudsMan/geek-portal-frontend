@@ -1,27 +1,4 @@
 'use client';
-/* eslint-disable */
-/*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___   
- | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _| 
- | |_| | | | | |_) || |  / / | | |  \| | | | | || | 
- |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |
- |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___|
-                                                                                                                                                                                                                                                                                                                                       
-=========================================================
-* Horizon UI - v1.1.0
-=========================================================
-
-* Product Page: https://www.horizon-ui.com/
-* Copyright 2022 Horizon UI (https://www.horizon-ui.com/)
-
-* Designed and Coded by Simmmple
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 import React from 'react';
 // Chakra imports
 import {
@@ -44,11 +21,17 @@ import { HSeparator } from 'components/separator/Separator';
 import DefaultAuthLayout from 'layouts/auth/Default';
 // Assets
 import Link from 'next/link';
-import { FcGoogle } from 'react-icons/fc';
+import { FaGithub } from 'react-icons/fa';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiEyeCloseLine } from 'react-icons/ri';
 
 export default function SignIn() {
+
+  // const handleLoginWithGitHub = () => {
+  //   window.location.assign("http://localhost:4000/api/v1/auth/github");
+  // };
+
+
   // Chakra color mode
   const textColor = useColorModeValue('navy.700', 'white');
   const textColorSecondary = 'gray.400';
@@ -93,7 +76,7 @@ export default function SignIn() {
             fontWeight="400"
             fontSize="md"
           >
-            Enter your email and password to sign in!
+            Sign In with GitHub! Sign In Now!
           </Text>
         </Box>
         <Flex
@@ -107,10 +90,12 @@ export default function SignIn() {
           me="auto"
           mb={{ base: '20px', md: 'auto' }}
         >
+       <Link href="/auth/register">
           <Button
             fontSize="sm"
             me="0px"
             mb="26px"
+          
             py="15px"
             h="50px"
             borderRadius="16px"
@@ -120,107 +105,22 @@ export default function SignIn() {
             _hover={googleHover}
             _active={googleActive}
             _focus={googleActive}
+           
           >
-            <Icon as={FcGoogle} w="20px" h="20px" me="10px" />
-            Sign in with Google
+            <Icon as={FaGithub} w="20px" h="20px" me="10px" />
+            Sign in with Github
           </Button>
-          <Flex align="center" mb="25px">
+          </Link>
+          
+          {/* <Flex align="center" mb="25px">
             <HSeparator />
             <Text color="gray.400" mx="14px">
               or
             </Text>
             <HSeparator />
-          </Flex>
-          <FormControl>
-            <FormLabel
-              display="flex"
-              ms="4px"
-              fontSize="sm"
-              fontWeight="500"
-              color={textColor}
-              mb="8px"
-            >
-              Email<Text color={brandStars}>*</Text>
-            </FormLabel>
-            <Input
-              isRequired={true}
-              variant="auth"
-              fontSize="sm"
-              ms={{ base: '0px', md: '0px' }}
-              type="email"
-              placeholder="mail@simmmple.com"
-              mb="24px"
-              fontWeight="500"
-              size="lg"
-            />
-            <FormLabel
-              ms="4px"
-              fontSize="sm"
-              fontWeight="500"
-              color={textColor}
-              display="flex"
-            >
-              Password<Text color={brandStars}>*</Text>
-            </FormLabel>
-            <InputGroup size="md">
-              <Input
-                isRequired={true}
-                fontSize="sm"
-                placeholder="Min. 8 characters"
-                mb="24px"
-                size="lg"
-                type={show ? 'text' : 'password'}
-                variant="auth"
-              />
-              <InputRightElement display="flex" alignItems="center" mt="4px">
-                <Icon
-                  color={textColorSecondary}
-                  _hover={{ cursor: 'pointer' }}
-                  as={show ? RiEyeCloseLine : MdOutlineRemoveRedEye}
-                  onClick={handleClick}
-                />
-              </InputRightElement>
-            </InputGroup>
-            <Flex justifyContent="space-between" align="center" mb="24px">
-              <FormControl display="flex" alignItems="center">
-                <Checkbox
-                  id="remember-login"
-                  colorScheme="brandScheme"
-                  me="10px"
-                />
-                <FormLabel
-                  htmlFor="remember-login"
-                  mb="0"
-                  fontWeight="normal"
-                  color={textColor}
-                  fontSize="sm"
-                >
-                  Keep me logged in
-                </FormLabel>
-              </FormControl>
-              <Link href="/auth/forgot-password">
-                <Text
-                  color={textColorBrand}
-                  fontSize="sm"
-                  w="124px"
-                  fontWeight="500"
-                >
-                  Forgot password?
-                </Text>
-              </Link>
-            </Flex>
-            <Button
-              fontSize="sm"
-              variant="brand"
-              fontWeight="500"
-              w="100%"
-              h="50"
-              mb="24px"
-            >
-              Sign In
-            </Button>
-          </FormControl>
-          <Flex
+          </Flex> */}
+         
+          {/* <Flex
             flexDirection="column"
             justifyContent="center"
             alignItems="start"
@@ -240,7 +140,7 @@ export default function SignIn() {
                 </Text>
               </Text>
             </Link>
-          </Flex>
+          </Flex> */}
         </Flex>
       </Flex>
     </DefaultAuthLayout>

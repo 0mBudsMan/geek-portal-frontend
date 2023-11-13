@@ -33,7 +33,7 @@ function AuthIllustration(props: {
         direction="column"
       >
         <Link
-          href="/admin"
+          href="/admin/default"
           style={{
             width: 'fit-content',
             marginTop: '40px',
@@ -53,7 +53,7 @@ function AuthIllustration(props: {
               color="secondaryGray.600"
             />
             <Text ms="0px" fontSize="sm" color="secondaryGray.600">
-              Back to Simmmple
+              Back to Dashboard
             </Text>
           </Flex>
         </Link>

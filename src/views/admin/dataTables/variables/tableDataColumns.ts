@@ -1,34 +1,39 @@
 type RowObj = {
+	position:number;
 	name: string;
-	progress: string;
-	quantity: number;
-	date: string; 
+	prmerged: string;
+	githubid: string;
+	points: string; 
 };
 
 const tableDataColumns: RowObj[] = [
-	{
-		name: 'Horizon UI PRO',
-		quantity: 2458,
-		progress: '17.5%',
-		date: '12 Jan 2021', 
+	{	
+		position:1,
+		name: 'Akshay Waghmare',
+		githubid: 'akshayw1',
+		prmerged: '99',
+		points: '232', 
 	},
 	{
-		name:'Horizon UI Free',
-		quantity: 1485,
-		progress: '10.8%',
-		date: '21 Feb 2021', 
+		position:2,
+		name:'Shashank Patil',
+		githubid: 'shashankpatil28',
+		prmerged: '77',
+		points: '219', 
 	},
 	{
-		name: 'Weekly Update',
-		quantity: 1024,
-		progress: '21.3%',
-		date: '13 Mar 2021', 
+		position:3,
+		name: 'Om Buddhadev',
+		githubid: 'ombuddamsn',
+		prmerged: '32',
+		points: '200', 
 	},
 	{
-		name: 'Venus 3D Asset',
-		quantity: 858,
-		progress: '31.5%',
-		date: '24 Jan 2021', 
+		position:4,
+		name: 'Bhupendra Jogi',
+		githubid: 'bhupendraJogi',
+		prmerged: '21',
+		points: '199', 
 	}, 
 ];
 

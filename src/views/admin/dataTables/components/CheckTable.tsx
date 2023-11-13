@@ -45,7 +45,6 @@ export default function CheckTable(props: { tableData: any }) {
 			),
 			cell: (info: any) => (
 				<Flex align='center'>
-					<Checkbox defaultChecked={info.getValue()[1]} colorScheme='brandScheme' me='10px' />
 					<Text color={textColor} fontSize='sm' fontWeight='700'>
 						{info.getValue()[0]}
 					</Text>
@@ -120,7 +119,7 @@ export default function CheckTable(props: { tableData: any }) {
 		<Card flexDirection='column' w='100%' px='0px' overflowX={{ sm: 'scroll', lg: 'hidden' }}>
 			<Flex px='25px' mb="8px" justifyContent='space-between' align='center'>
 				<Text color={textColor} fontSize='22px' mb="4px" fontWeight='700' lineHeight='100%'>
-					Check Table
+					OpenCode'23 LeaderBoard
 				</Text>
 				<Menu />
 			</Flex>

@@ -106,6 +106,6 @@ new people that already use Horizon UI!
 
 ### Copyright and license
 
-⭐️ [Copyright 2022 Simmmple ](https://www.simmmple.com/?ref=readme-horizon-nextjs)
+⭐️ [Copyright 2022 Simmmple ](https://www.geekhaven.iiita.ac.in/?ref=readme-horizon-nextjs)
 
-📄 [Horizon UI License](https://www.simmmple.com/licenses?ref=readme-horizon-nextjs)
+📄 [Horizon UI License](https://www.geekhaven.iiita.ac.in/licenses?ref=readme-horizon-nextjs)
