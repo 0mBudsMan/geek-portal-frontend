@@ -13,6 +13,15 @@ import {
   getActiveRoute,
   isWindowAvailable
 } from 'utils/navigation'
+import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
+
+const theme = createMuiTheme();
+
+const useStyles = makeStyles((theme) => {
+  root: {
+    // some CSS that accesses the theme
+  }
+});
 
 interface DashboardLayoutProps extends PropsWithChildren {
   [x: string]: any
@@ -32,6 +41,7 @@ export default function AdminLayout (props: DashboardLayoutProps) {
   })
 
   return (
+    <ThemeProvider theme={theme}>
     <Box>
       <SidebarContext.Provider
         value={{
@@ -83,5 +93,6 @@ export default function AdminLayout (props: DashboardLayoutProps) {
         </Box>
       </SidebarContext.Provider>
     </Box>
+    </ThemeProvider>
   )
 }

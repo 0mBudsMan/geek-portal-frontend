@@ -83,7 +83,7 @@ const addevent = () => {
         }
     };
     return (
-        <div class="min-h-screen p-6 flex items-center justify-center">
+        <div class="min-h-screen flex items-center justify-center pt-12">
             <div class="container max-w-screen-lg mx-auto">
                 <div>
                 
