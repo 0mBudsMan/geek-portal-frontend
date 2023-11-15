@@ -13,13 +13,8 @@ export default function GeneralInformation(props: { [x: string]: any }) {
 	const cardShadow = useColorModeValue('0px 18px 40px rgba(112, 144, 176, 0.12)', 'unset');
 	return (
 		<Card mb={{ base: '0px', '2xl': '20px' }} {...rest}>
-			<Text color={textColorPrimary} fontWeight='bold' fontSize='2xl' mt='10px' mb='4px'>
+			<Text color={textColorPrimary} fontWeight='bold' fontSize='2xl' mt='10px' mb='15px'>
 				General Information
-			</Text>
-			<Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
-				As we live, our hearts turn colder. Cause pain is what we go through as we become older. We get insulted
-				by others, lose trust for those others. We get back stabbed by friends. It becomes harder for us to give
-				others a hand. We get our heart broken by people we love, even that we give them all...
 			</Text>
 			<SimpleGrid columns={2} gap='20px'>
 				<Information boxShadow={cardShadow} title='Education' value='Stanford University' />

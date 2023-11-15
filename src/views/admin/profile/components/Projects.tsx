@@ -26,10 +26,10 @@ export default function Projects (props: { [x: string]: any }) {
         mt='10px'
         mb='4px'
       >
-        All projects
+        All Merged
       </Text>
       <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
-        Here you can find more details about your projects. Keep you user
+        Here you can find more details about your merged prs. Keep you user
         engaged by providing meaningful information.
       </Text>
       <Project
