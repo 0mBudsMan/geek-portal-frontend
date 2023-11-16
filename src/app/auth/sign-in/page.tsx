@@ -25,11 +25,16 @@ import { FaGithub } from 'react-icons/fa';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiEyeCloseLine } from 'react-icons/ri';
 
+
 export default function SignIn() {
 
-  // const handleLoginWithGitHub = () => {
-  //   window.location.assign("http://localhost:4000/api/v1/auth/github");
-  // };
+  const handleLoginWithGitHub = () => {
+    window.location.assign("http://localhost:4000/api/v1/auth/github");
+  };
+
+
+
+
 
 
   // Chakra color mode
@@ -51,7 +56,7 @@ export default function SignIn() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   return (
-    <DefaultAuthLayout illustrationBackground={'/img/auth/auth.png'}>
+    <DefaultAuthLayout illustrationBackground={'/img/avatars/avatar1.png'}>
       <Flex
         maxW={{ base: '100%', md: 'max-content' }}
         w="100%"
@@ -90,7 +95,7 @@ export default function SignIn() {
           me="auto"
           mb={{ base: '20px', md: 'auto' }}
         >
-       <Link href="/auth/register">
+
           <Button
             fontSize="sm"
             me="0px"
@@ -105,12 +110,13 @@ export default function SignIn() {
             _hover={googleHover}
             _active={googleActive}
             _focus={googleActive}
+          onClick={handleLoginWithGitHub}
            
           >
             <Icon as={FaGithub} w="20px" h="20px" me="10px" />
             Sign in with Github
           </Button>
-          </Link>
+       
           
           {/* <Flex align="center" mb="25px">
             <HSeparator />

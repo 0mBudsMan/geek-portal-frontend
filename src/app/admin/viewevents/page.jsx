@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ReactSimplyCarousel from 'react-simply-carousel';
 import { useEffect } from 'react';
 import { Image } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react';
 
 var eventData = [];
 
@@ -34,9 +35,11 @@ export default function viewevents() {
     )
   }
   return (
-    eventData.map((item,i)=> 
+    <Box pt={{ base: '130px', md: '80px', xl: '80px' }} >
+    {eventData.map((item,i)=>
+    
     <div style={{paddingTop: 20}}>
-    <div style={{display: "flex"}}>
+    <div style={{display: "flex", margin: "auto"}}>
     <h1>{i+1}. {item.name}</h1>
     <Image
     boxSize='80px'
@@ -98,7 +101,7 @@ export default function viewevents() {
         speed={400}
         easing="linear"
       >
-        {item.cover.map((img,j)=><div style={{ width: 300, height: 325, background: '#065535' }}>
+        {item.cover.map((img,j)=><div style={{ width: 300, height: 325,  }}>
         <Image
     boxSize='300px'
     
@@ -110,6 +113,8 @@ export default function viewevents() {
         
         
       </ReactSimplyCarousel>
-    </div></div>)
+    </div></div>
+    )}
+    </Box>
   );
 }

@@ -17,6 +17,7 @@ import {
   useColorModeValue,
   Select
 } from '@chakra-ui/react';
+import { useQuery } from '@tanstack/react-query';
 // Custom components
 import { HSeparator } from 'components/separator/Separator';
 import DefaultAuthLayout from 'layouts/auth/Default';
@@ -38,6 +39,42 @@ export default function SignIn() {
     localStorage.setItem('token',TokenParam);
     console.log(TokenParam);
   },[])
+
+
+
+  const token = localStorage.getItem('token');
+
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn: async () => {
+      const response = await fetch('http://localhost:4000/api/v1/participant/userInfo', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch user info');
+      }
+
+      return response.json();
+    },
+  });
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (isError) {
+    return <p>Error: {error.message}</p>;
+  }
+
+
+  console.log("Data",data);
+
+
   
   const textColor = useColorModeValue('navy.700', 'white');
   const textColorSecondary = 'gray.400';
@@ -56,6 +93,20 @@ export default function SignIn() {
   );
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
+
+
+  useEffect(()=>{
+    const querystring= window.location.search;
+    const urlParam= new URLSearchParams(querystring);
+    const TokenParam = urlParam.get("token");
+
+
+    localStorage.setItem('token',TokenParam);
+    console.log(TokenParam);
+  },[])
+
+
+
   return (
 
     <DefaultAuthLayout>
@@ -116,7 +167,7 @@ export default function SignIn() {
                 fontSize="sm"
                 ms={{ base: '0px', md: '0px' }}
                 type="email"
-                placeholder="akshayw1"
+                placeholder="as"
                 mb="24px"
                 fontWeight="500"
                 size="lg"
