@@ -18,6 +18,7 @@ import {
   Select,
 } from '@chakra-ui/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { useToast } from '@chakra-ui/react'
 // Custom components
 import { HSeparator } from 'components/separator/Separator';
 import DefaultAuthLayout from 'layouts/auth/Default';
@@ -27,34 +28,27 @@ import { useEffect } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiEyeCloseLine } from 'react-icons/ri';
+import axios from 'axios';
 
 
 
-const sendRegData = (formData)=>{
-  return ()=>{
-    fetch("http://localhost:4000/api/v1/register",{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-
-      },
-      body:JSON.stringify(formData),
-
-    })
-  }
-}
 
 export default function SignIn() {
   const [GitData, setGitData] = useState({});
   const [gituser, setGitUser] = useState('');
   const [formData, setformData] = useState({
-    username: '',
+    name: gituser,
     email: '',
-    Degree: '',
-    Branch: '',
-    College: '',
-    DiscordId: '',
+    degree: '',
+    branch: '',
+    college: '',
+    discordId: '',
+    githubId:'',
+    graduationYear: '',
+
   });
+
+  const toast = useToast()
 
   useEffect(() => {
     const querystring = window.location.search;
@@ -94,7 +88,7 @@ export default function SignIn() {
       localStorage.setItem('GithubData', JSON.stringify(newData));
 
       return newData;
-      // console.log('GitData', newData);
+    
     },
   });
 
@@ -102,24 +96,19 @@ export default function SignIn() {
     const GitDatalocal = localStorage.getItem('GithubData');
     const ParseData = JSON.parse(GitDatalocal);
     setGitData(ParseData.data);
-    setGitUser(ParseData.data.githubUsername);
+   
 
     // rest of your useEffect code
   }, []); // empty dependency array means it runs once after the initial render
 
-  // console.log(GitData);
+  
 
   const textColor = useColorModeValue('navy.700', 'white');
   const textColorSecondary = 'gray.400';
   const textColorDetails = useColorModeValue('navy.700', 'secondaryGray.600');
   const textColorBrand = useColorModeValue('brand.500', 'white');
   const brandStars = useColorModeValue('brand.500', 'brand.400');
-  const googleBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.200');
-  const googleText = useColorModeValue('navy.700', 'white');
-  const googleHover = useColorModeValue(
-    { bg: 'gray.200' },
-    { bg: 'whiteAlpha.300' },
-  );
+ 
   const googleActive = useColorModeValue(
     { bg: 'secondaryGray.300' },
     { bg: 'whiteAlpha.200' },
@@ -137,17 +126,40 @@ export default function SignIn() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    setformData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  
+  };
+  
 
-    // If the input field is not related to the username, update the state normally
-    if (name !== 'username') {
-      setformData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
+  const sendRegData = async (formData) => {
+    try {
+      const token = localStorage.getItem('token');
+      console.log(token);
+  
+      const response = await axios.post(
+        'http://localhost:4000/api/v1/register',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      
+      console.log(response.data);
+    } catch (error) {
+    
+      console.error('Error sending registration data:', error.message);
     }
   };
 
-  const registerMutation = useMutation(sendRegData(formData),{
+  const registerMutation = useMutation({
+    mutationFn:sendRegData,
     onSuccess:()=>{
       console.log("Success")
     },
@@ -157,13 +169,29 @@ export default function SignIn() {
   })
 
   const handleSubmit = (e) => {
-    console.log(formData);
-    setformData((prevData) => ({
-      ...prevData,
-      username: gituser,
-    }));
+    e.preventDefault();
+    registerMutation.mutate(formData);
 
-    registerMutation.mutate();
+    for (const key in formData) {
+      if (formData.hasOwnProperty(key) && formData[key].trim() === '') {
+        // If any field is blank, handle the error (e.g., show an alert or console log)
+        console.error(`Error: ${key} is blank`);
+        toast({
+          title: `${key} is Required `,
+          description: `Please enter the ${key}`,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        })
+        return; 
+      }
+    }
+
+  
+   
+  
+
+    console.log(formData);
   };
 
  
@@ -222,7 +250,7 @@ export default function SignIn() {
                   color={textColor}
                   mb="8px"
                 >
-                  Username<Text color={brandStars}>*</Text>
+                  Name<Text color={brandStars}>*</Text>
                 </FormLabel>
                 <Input
                   isRequired={true}
@@ -230,13 +258,15 @@ export default function SignIn() {
                   fontSize="sm"
                   ms={{ base: '0px', md: '0px' }}
                   type="text"
-                  placeholder="username"
-                  name="username"
-                  value={`${GitData.githubUsername}`}
+                  placeholder="Enter Name"
+                  name="name"
                   onChange={handleChange}
+
+                  
                   mb="24px"
                   fontWeight="500"
                   size="lg"
+                  required
                 />
               </FormControl>
 
@@ -264,6 +294,7 @@ export default function SignIn() {
                   mb="24px"
                   fontWeight="500"
                   size="lg"
+                  required
                 />
               </FormControl>
             </Flex>
@@ -284,13 +315,14 @@ export default function SignIn() {
                   placeholder="Select option"
                   isRequired={true}
                   variant="auth"
-                  name="Degree"
+                  name="degree"
                   fontSize="sm"
                   onChange={handleChange}
                   ms={{ base: '0px', md: '0px' }}
                   mb="24px"
                   fontWeight="500"
                   size="lg"
+                  required
                 >
                   <option value="BTECH">BTECH</option>
                   <option value="MTECH">MTECH</option>
@@ -316,12 +348,13 @@ export default function SignIn() {
                   fontSize="sm"
                   ms={{ base: '0px', md: '0px' }}
                   type="text"
-                  name="Branch"
+                  name="branch"
                   placeholder="Electronic and Communication"
                   mb="24px"
                   onChange={handleChange}
                   fontWeight="500"
                   size="lg"
+                  required
                 />
               </FormControl>
             </Flex>
@@ -332,10 +365,11 @@ export default function SignIn() {
                   display="flex"
                   ms="4px"
                   fontSize="sm"
-                  name="College"
+                  name="college"
                   fontWeight="500"
                   color={textColor}
                   mb="8px"
+                  
                 >
                   Enter College<Text color={brandStars}>*</Text>
                 </FormLabel>
@@ -345,12 +379,13 @@ export default function SignIn() {
                   fontSize="sm"
                   ms={{ base: '0px', md: '0px' }}
                   type="text"
-                  name="College"
+                  name="college"
                   onChange={handleChange}
                   placeholder="Indian Institute of Information Techonlogy, Allahabad"
                   mb="24px"
                   fontWeight="500"
                   size="lg"
+                  required
                 />
               </FormControl>
 
@@ -371,12 +406,68 @@ export default function SignIn() {
                   fontSize="sm"
                   ms={{ base: '0px', md: '0px' }}
                   type="text"
-                  name="DiscordId"
+                  name="discordId"
                   onChange={handleChange}
                   placeholder="akshayw1"
                   mb="24px"
                   fontWeight="500"
                   size="lg"
+                />
+              </FormControl>
+            </Flex>
+            <Flex justifyContent="space-between" align="center" gap={6}>
+              <FormControl>
+                <FormLabel
+                  display="flex"
+                  ms="4px"
+                  fontSize="sm"
+                  name="college"
+                  fontWeight="500"
+                  color={textColor}
+                  mb="8px"
+                >
+                  Enter Graduation Year<Text color={brandStars}>*</Text>
+                </FormLabel>
+                <Input
+                  isRequired={true}
+                  variant="auth"
+                  fontSize="sm"
+                  ms={{ base: '0px', md: '0px' }}
+                  type="number"
+                  name="graduationYear"
+                  onChange={handleChange}
+                  placeholder="2026"
+                  mb="24px"
+                  fontWeight="500"
+                  size="lg"
+                  required
+                />
+              </FormControl>
+
+              <FormControl>
+                <FormLabel
+                  display="flex"
+                  ms="4px"
+                  fontSize="sm"
+                  fontWeight="500"
+                  color={textColor}
+                  mb="8px"
+                >
+                  Enter Github ID<Text color={brandStars}>*</Text>
+                </FormLabel>
+                <Input
+                  isRequired={true}
+                  variant="auth"
+                  fontSize="sm"
+                  ms={{ base: '0px', md: '0px' }}
+                  type="text"
+                  name="githubId"
+                  onChange={handleChange}
+                  placeholder="akshayw1"
+                  mb="24px"
+                  fontWeight="500"
+                  size="lg"
+                  required
                 />
               </FormControl>
             </Flex>

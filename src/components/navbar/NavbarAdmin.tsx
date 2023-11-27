@@ -22,6 +22,7 @@ export default function AdminNavbar(props: {
   brandText: string;
   logoText: string;
   fixed: boolean;
+  profilename: string;
   onOpen: (...args: any[]) => any;
 }) {
   const [scrolled, setScrolled] = useState(false);
@@ -37,27 +38,11 @@ export default function AdminNavbar(props: {
     }
   });
 
-  const token = localStorage.getItem('token'); // Assuming you store your token in localStorage
-
-  // const { data} = useQuery({
-  //   queryKey: ['userInfo'],
-  //   queryFn: async () => {
-  //     const response = await fetch('http://localhost:4000/api/v1/participant/userInfo', {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-  //       },
-  //     });
-
- 
-
-  //     return response.json();
-  //   },
-  // });
+//   const GitDatanew = localStorage.getItem('GithubData');
+//   const Parseata = JSON.parse(GitDatanew);
+//  const profilename = Parseata.data.name;
 
 
-  // console.log("Data",data);
 
   const { secondary, message, brandText } = props;
 
@@ -168,7 +153,7 @@ export default function AdminNavbar(props: {
               boxShadow: 'none',
             }}
           >
-            <Box>👋&nbsp; Hey, Akshay</Box>
+            <Box>👋&nbsp;"AKshay"</Box>
           </Link>
         </Box>
         <Box ms="auto" w={{ sm: '100%', md: 'unset' }}>

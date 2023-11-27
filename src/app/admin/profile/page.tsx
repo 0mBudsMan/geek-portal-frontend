@@ -15,6 +15,15 @@ import Upload from 'views/admin/profile/components/Upload';
 import banner from 'img/auth/banner.png';
 import avatar from 'img/avatars/avatar4.png';
 
+
+// const GitDatanew = localStorage.getItem('GithubData');
+// const Parseata = JSON.parse(GitDatanew);
+// const profilename = Parseata.data.name;
+// const githubusername= Parseata.data.githubUsername;
+// const repos = Parseata.data.repositories;
+// console.log(repos);
+
+
 export default function ProfileOverview() {
   return (
     <Box 
@@ -31,12 +40,14 @@ export default function ProfileOverview() {
         }}
         gap={{ base: '20px', xl: '20px' }}
       >
+
+      
         <Banner
           gridArea="1 / 4 / 4 / 1"
           banner={banner}
           avatar={avatar}
-          name="Adela Parkson"
-          job="Product Designer"
+          name="{profilename}"
+          job="{githubusername}"
           posts="17"
           followers="9.7k"
           following="274"
@@ -69,10 +80,11 @@ export default function ProfileOverview() {
         }}
         gap={{ base: '20px', xl: '20px' }}
       >
+        
         <Projects
           banner={banner}
           avatar={avatar}
-          name="Adela Parkson"
+          name="{profilename}"
           job="Product Designer"
           posts="17"
           followers="9.7k"
