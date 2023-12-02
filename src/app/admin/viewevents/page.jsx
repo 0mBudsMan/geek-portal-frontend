@@ -43,7 +43,7 @@ export default function viewevents() {
     <h1>{i+1}. {item.name}</h1>
     <Image
     boxSize='80px'
-    objectFit='cover'
+    
     src={item.logo}
     alt='Dan Abramov'
   />

@@ -26,6 +26,15 @@ export default function AdminNavbar(props: {
   onOpen: (...args: any[]) => any;
 }) {
   const [scrolled, setScrolled] = useState(false);
+  const[TempData,setTempData] = useState(' ');
+
+useEffect(() => {
+  const GitDatalocal = localStorage.getItem('GithubData');
+  const ParseData = JSON.parse(GitDatalocal);
+  setTempData(ParseData.data);
+}, []);
+
+console.log(TempData)
 
   useEffect(() => {
     if (isWindowAvailable()) {
@@ -68,6 +77,8 @@ export default function AdminNavbar(props: {
       setScrolled(false);
     }
   };
+
+  
 
   return (
     <Box
@@ -153,7 +164,7 @@ export default function AdminNavbar(props: {
               boxShadow: 'none',
             }}
           >
-            <Box>👋&nbsp;"AKshay"</Box>
+            <Box>👋&nbsp;{TempData.name}</Box>
           </Link>
         </Box>
         <Box ms="auto" w={{ sm: '100%', md: 'unset' }}>

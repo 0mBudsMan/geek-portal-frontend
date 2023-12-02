@@ -1,5 +1,6 @@
 // Chakra imports
 import { Text, useColorModeValue } from '@chakra-ui/react'
+import { useState,useEffect } from 'react'
 // Assets
 import Project1 from 'img/profile/Project1.png'
 import Project2 from 'img/profile/Project2.png'
@@ -11,6 +12,19 @@ import Project from 'views/admin/profile/components/Project'
 export default function Projects (props: { [x: string]: any }) {
   const { ...rest } = props
   // Chakra Color Mode
+  const[TempData,setTempData] = useState(' ');
+  const[Repos,setRepos] = useState([]);
+
+  useEffect(() => {
+    const GitDatalocal = localStorage.getItem('GithubData');
+    const ParseData = JSON.parse(GitDatalocal);
+    setTempData(ParseData.data);
+    setRepos(ParseData.data.repositories
+
+      )
+  }, []);
+  
+  console.log(TempData)
   const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = 'gray.400'
   const cardShadow = useColorModeValue(
@@ -26,35 +40,28 @@ export default function Projects (props: { [x: string]: any }) {
         mt='10px'
         mb='4px'
       >
-        All Merged
+       Recent Contributed Repositeries
       </Text>
       <Text color={textColorSecondary} fontSize='md' me='26px' mb='40px'>
         Here you can find more details about your merged prs. Keep you user
         engaged by providing meaningful information.
       </Text>
-      <Project
+
+      {
+  Repos.slice(0,5).map((repo, index) => (
+    // <li key={index}>{repo.name}</li>
+    <Project
         boxShadow={cardShadow}
         mb='20px'
         image={Project1}
         ranking='1'
-        link='#'
-        title='Technology behind the Blockchain'
+        language={repo.languages.slice(0,3).join(',')}
+        link={repo.githubUrl}
+        title={repo.name}
       />
-      <Project
-        boxShadow={cardShadow}
-        mb='20px'
-        image={Project2}
-        ranking='2'
-        link='#'
-        title='Greatest way to a good Economy'
-      />
-      <Project
-        boxShadow={cardShadow}
-        image={Project3}
-        ranking='3'
-        link='#'
-        title='Most essential tips for Burnout'
-      />
+  ))
+}
+     
     </Card>
   )
 }

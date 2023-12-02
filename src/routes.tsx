@@ -13,13 +13,13 @@ import { IRoute } from 'types/navigation';
 const routes: IRoute[] = [
   {
     name: 'Our Events',
-    layout: '/admin',
+    layout: '/user',
     path: '/home',
     icon: <Icon as={MdHome} width="20px" height="20px" color="inherit" />,
   },
   {
     name: 'Leaderboard',
-    layout: '/admin',
+    layout: '/user',
     icon: <Icon as={MdBarChart} width="20px" height="20px" color="inherit" />,
     path: '/leaderboard',
   },
@@ -40,7 +40,7 @@ const routes: IRoute[] = [
  
   {
     name: 'Profile',
-    layout: '/admin',
+    layout: '/user',
     path: '/profile',
     icon: <Icon as={MdPerson} width="20px" height="20px" color="inherit" />,
   },

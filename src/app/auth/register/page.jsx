@@ -17,6 +17,7 @@ import {
   useColorModeValue,
   Select,
 } from '@chakra-ui/react';
+import {FetchedData,sendRegData} from '../../api/profile/profile'
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useToast } from '@chakra-ui/react'
 // Custom components
@@ -58,48 +59,21 @@ export default function SignIn() {
     localStorage.setItem('token', TokenParam);
   }, []);
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data } = useQuery({
     queryKey: ['userInfo'],
-    queryFn: async () => {
-      const storedGithubData = localStorage.getItem('GithubData');
-      const token = localStorage.getItem('token');
-      if (storedGithubData) {
-        return JSON.parse(storedGithubData);
-      }
-
-      // If GithubData is not in local storage, fetch it from the server
-      const response = await fetch(
-        'http://localhost:4000/api/v1/participant/userInfo',
-        {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch user info');
-      }
-
-      const newData = await response.json();
-
-      localStorage.setItem('GithubData', JSON.stringify(newData));
-
-      return newData;
-    
-    },
+    queryFn:FetchedData,
+  
   });
-
   useEffect(() => {
     const GitDatalocal = localStorage.getItem('GithubData');
     const ParseData = JSON.parse(GitDatalocal);
+   
     setGitData(ParseData.data);
    
+  }, []);
 
-    // rest of your useEffect code
-  }, []); // empty dependency array means it runs once after the initial render
+
+
 
   
 
@@ -134,29 +108,6 @@ export default function SignIn() {
   };
   
 
-  const sendRegData = async (formData) => {
-    try {
-      const token = localStorage.getItem('token');
-      console.log(token);
-  
-      const response = await axios.post(
-        'http://localhost:4000/api/v1/register',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-  
-      
-      console.log(response.data);
-    } catch (error) {
-    
-      console.error('Error sending registration data:', error.message);
-    }
-  };
 
   const registerMutation = useMutation({
     mutationFn:sendRegData,

@@ -36,6 +36,7 @@ export default function AuthLayout({ children }: AuthProps) {
           transitionDuration=".2s, .2s, .35s"
           transitionProperty="top, bottom, width"
           transitionTimingFunction="linear, linear, ease"
+          
         >
           <Box mx="auto" minH="100vh">
             {children}

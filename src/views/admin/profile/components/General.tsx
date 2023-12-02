@@ -1,4 +1,5 @@
 // Chakra imports
+import { useState,useEffect } from 'react';
 import { SimpleGrid, Text, useColorModeValue } from '@chakra-ui/react';
 // Custom components
 import Card from 'components/card/Card';
@@ -8,6 +9,15 @@ import Information from 'views/admin/profile/components/Information';
 export default function GeneralInformation(props: { [x: string]: any }) {
 	const { ...rest } = props;
 	// Chakra Color Mode
+	const[TempData,setTempData] = useState(' ');
+
+  useEffect(() => {
+    const GitDatalocal = localStorage.getItem('GithubData');
+    const ParseData = JSON.parse(GitDatalocal);
+    setTempData(ParseData.data);
+  }, []);
+  
+  console.log(TempData)
 	const textColorPrimary = useColorModeValue('secondaryGray.900', 'white');
 	const textColorSecondary = 'gray.400';
 	const cardShadow = useColorModeValue('0px 18px 40px rgba(112, 144, 176, 0.12)', 'unset');
@@ -17,12 +27,12 @@ export default function GeneralInformation(props: { [x: string]: any }) {
 				General Information
 			</Text>
 			<SimpleGrid columns={2} gap='20px'>
-				<Information boxShadow={cardShadow} title='Education' value='Stanford University' />
-				<Information boxShadow={cardShadow} title='Languages' value='English, Spanish, Italian' />
-				<Information boxShadow={cardShadow} title='Department' value='Product Design' />
-				<Information boxShadow={cardShadow} title='Work History' value='Google, Facebook' />
-				<Information boxShadow={cardShadow} title='Organization' value='Simmmple Web LLC' />
-				<Information boxShadow={cardShadow} title='Birthday' value='20 July 1986' />
+				<Information boxShadow={cardShadow} title='Name' value={TempData.name} />
+				<Information boxShadow={cardShadow} title='Github Username' value={TempData.githubUsername} />
+				<Information boxShadow={cardShadow} title='College' value='IIIT Allahabad' />
+				<Information boxShadow={cardShadow} title='Discord ID' value='aksahyww1' />
+				<Information boxShadow={cardShadow} title='Graduation Year' value='2026' />
+				
 			</SimpleGrid>
 		</Card>
 	);

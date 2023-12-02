@@ -2,7 +2,7 @@
 import { Box, Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import Card from 'components/card/Card'
 import { NextAvatar } from 'components/image/Avatar'
-
+import { useState,useEffect } from 'react'
 export default function Banner (props: {
   banner: string
   avatar: string
@@ -24,6 +24,17 @@ export default function Banner (props: {
     ...rest
   } = props
   // Chakra Color Mode
+
+  const[TempData,setTempData] = useState(' ');
+
+  useEffect(() => {
+    const GitDatalocal = localStorage.getItem('GithubData');
+    const ParseData = JSON.parse(GitDatalocal);
+    setTempData(ParseData.data);
+  }, []);
+  
+  console.log(TempData)
+  
   const textColorPrimary = useColorModeValue('secondaryGray.900', 'white')
   const textColorSecondary = 'gray.400'
   const borderColor = useColorModeValue(
@@ -49,10 +60,11 @@ export default function Banner (props: {
         borderColor={borderColor}
       />
       <Text color={textColorPrimary} fontWeight='bold' fontSize='xl' mt='10px'>
-        {name}
+     {TempData.name}
       </Text>
       <Text color={textColorSecondary} fontSize='sm'>
-        {job}
+      {TempData.githubUsername
+}
       </Text>
       <Flex w='max-content' mx='auto' mt='26px'>
         <Flex mx='auto' me='60px' alignItems='center' flexDirection='column'>

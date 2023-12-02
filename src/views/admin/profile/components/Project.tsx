@@ -8,6 +8,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 // Custom components
+import { useState,useEffect } from 'react';
 import Card from 'components/card/Card';
 import { FaGithub } from "react-icons/fa";
 import { Image } from 'components/image/Image';
@@ -19,14 +20,16 @@ export default function Project(props: {
   ranking: number | string;
   link: string;
   image: string;
+  language:string
   [x: string]: any;
 }) {
-  const { title, ranking, link, image, ...rest } = props;
+  const { title, ranking, link,language, image, ...rest } = props;
   // Chakra Color Mode
   const textColorPrimary = useColorModeValue('secondaryGray.900', 'white');
   const textColorSecondary = 'gray.400';
   const brandColor = useColorModeValue('brand.500', 'white');
   const bg = useColorModeValue('white', 'navy.700');
+  
   return (
     <Card bg={bg} {...rest} p="14px">
       <Flex align="center" direction={{ base: 'column', md: 'row' }}>
@@ -55,7 +58,7 @@ export default function Project(props: {
               fontSize="sm"
               me="4px"
             >
-              Project #{ranking} •{' '}
+              {language} #{ranking} •{' '}
             </Text>
             <Link fontWeight="500" color={brandColor} href={link} fontSize="sm">
               See project details
