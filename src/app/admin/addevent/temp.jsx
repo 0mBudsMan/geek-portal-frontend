@@ -62,18 +62,15 @@ const addevent = () => {
         event.preventDefault();
          
         const finalData=({
-            title: eventData.Fullname,
-            description: eventData.Description,
-            startDate: '2023-12-01T00:00:00Z',
-            endDate: '2023-12-02T00:00:00Z',
-            
-            logoUrl: logo,
-            coverImages: coverimages,
+            name: eventData.Fullname,
+            desc: eventData.Description,
+            cover: coverimages,
+            logo: logo,
 
         });
         coverimages = [];
         //storing event details in local storage
-       /* if(!localStorage.getItem("eventsArray")){
+        if(!localStorage.getItem("eventsArray")){
             var eventsArray = [];
             eventsArray.push(finalData);
             localStorage.setItem("eventsArray", JSON.stringify(eventsArray));
@@ -83,39 +80,7 @@ const addevent = () => {
             eventsArray.push(finalData);
             localStorage.setItem("eventsArray", JSON.stringify(eventsArray));
             
-        }*/
-        const createEvent = async (finalData) => {
-
-            try {
-                
-              const token = localStorage.getItem('token');
-              console.log(token);
-              const response = await fetch('http://localhost:4000/api/v1/admin/create', {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(finalData),
-              });
-          
-              if (!response.ok) {
-                throw new Error('Failed to create event');
-              }
-          
-              const responseData = await response.json();
-              console.log('Event created successfully:', finalData);
-              // You can update your UI or perform other actions based on the response
-            } catch (error) {
-              console.error('Error creating event:', error.message);
-              // Handle the error and provide feedback to the user
-            }
-          };
-          
-          // Example usage:
-         
-          
-          createEvent(finalData);
+        }
     };
     return (
 

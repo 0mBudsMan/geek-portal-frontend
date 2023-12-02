@@ -64,13 +64,13 @@ export default function SignIn() {
     queryFn:FetchedData,
   
   });
-  useEffect(() => {
-    const GitDatalocal = localStorage.getItem('GithubData');
-    const ParseData = JSON.parse(GitDatalocal);
-   
-    setGitData(ParseData.data);
-   
-  }, []);
+    useEffect(() => {
+      const GitDatalocal = localStorage.getItem('GithubData');
+      const ParseData = JSON.parse(GitDatalocal);
+    
+      setGitData(ParseData.data);
+    
+    }, []);
 
 
 
@@ -107,6 +107,29 @@ export default function SignIn() {
   
   };
   
+  async function sendRegData(formData){
+    try {
+      const token = localStorage.getItem('token');
+      console.log(token);
+      console.log("Hiii")
+      const response = await axios.post(
+        'http://localhost:4000/api/v1/register',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      
+      console.log(response.data);
+    } catch (error) {
+    
+      console.error('Error sending registration data:', error.message);
+    }
+  };
 
 
   const registerMutation = useMutation({

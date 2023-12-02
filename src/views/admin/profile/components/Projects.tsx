@@ -55,7 +55,7 @@ export default function Projects (props: { [x: string]: any }) {
         mb='20px'
         image={Project1}
         ranking='1'
-        language={repo.languages.slice(0,3).join(',')}
+        language='English'
         link={repo.githubUrl}
         title={repo.name}
       />

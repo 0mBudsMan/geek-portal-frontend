@@ -52,7 +52,8 @@ export default function Banner (props: {
       />
       <NextAvatar
         mx='auto'
-        src={avatar}
+        src={TempData.avatar_url
+        }
         h='87px'
         w='87px'
         mt='-43px'
