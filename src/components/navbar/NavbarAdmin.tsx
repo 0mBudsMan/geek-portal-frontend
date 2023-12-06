@@ -29,9 +29,11 @@ export default function AdminNavbar(props: {
   const[TempData,setTempData] = useState(' ');
 
 useEffect(() => {
+  if(localStorage.getItem('GithubData') !== null){
   const GitDatalocal = localStorage.getItem('GithubData');
   const ParseData = JSON.parse(GitDatalocal);
-  setTempData(ParseData.data);
+  setTempData(ParseData.data);}
+ 
 }, []);
 
 console.log(TempData)

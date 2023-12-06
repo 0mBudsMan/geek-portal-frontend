@@ -55,6 +55,9 @@ export default function SignIn() {
     const querystring = window.location.search;
     const urlParam = new URLSearchParams(querystring);
     const TokenParam = urlParam.get('token');
+    if(TokenParam===null){
+      window.location.assign('localhost:3000/auth/sign-in')
+    }
 
     localStorage.setItem('token', TokenParam);
   }, []);
@@ -67,6 +70,7 @@ export default function SignIn() {
     useEffect(() => {
       const GitDatalocal = localStorage.getItem('GithubData');
       const ParseData = JSON.parse(GitDatalocal);
+      
     
       setGitData(ParseData.data);
     

@@ -26,6 +26,9 @@ import avatar from 'img/avatars/avatar4.png';
 
 export default function ProfileOverview() {
   return (
+    localStorage.getItem('GithubData') === null ? <Box 
+    pt={{ base: '130px', md: '80px', xl: '80px' }}><a href='localhost:4000/auth/sign-in'><h1>SIGN IN (click) TO VIEW YOUR PROFILE</h1></a></Box> : 
+
     <Box 
     pt={{ base: '130px', md: '80px', xl: '80px' }}>
       {/* Main Fields */}
