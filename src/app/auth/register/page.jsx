@@ -46,6 +46,7 @@ export default function SignIn() {
     discordId: '',
     githubId:'',
     graduationYear: '',
+    avatarUrl:'',
 
   });
 
@@ -55,6 +56,8 @@ export default function SignIn() {
     const querystring = window.location.search;
     const urlParam = new URLSearchParams(querystring);
     const TokenParam = urlParam.get('token');
+    const AvatarUrl = urlParam.get('avatar_url');
+    console.log(AvatarUrl);
     if(TokenParam===null){
       window.location.assign('localhost:3000/auth/sign-in')
     }
@@ -66,13 +69,21 @@ export default function SignIn() {
     
 
     localStorage.setItem('token', TokenParam);
+
+    setformData((prevData) => ({
+      ...prevData,
+      avatarUrl: AvatarUrl || '',
+    }));
+  
+
+
   }, []);
 
-  const { data } = useQuery({
-    queryKey: ['userInfo'],
-    queryFn:FetchedData,
+  // const { data } = useQuery({
+  //   queryKey: ['userInfo'],
+  //   queryFn:FetchedData,
   
-  });
+  // });
     useEffect(() => {
       const GitDatalocal = localStorage.getItem('GithubData');
       const ParseData = JSON.parse(GitDatalocal);
@@ -84,7 +95,7 @@ export default function SignIn() {
 
 
 
-
+   
   
 
   const textColor = useColorModeValue('navy.700', 'white');
@@ -100,13 +111,7 @@ export default function SignIn() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
-  useEffect(() => {
-    const querystring = window.location.search;
-    const urlParam = new URLSearchParams(querystring);
-    const TokenParam = urlParam.get('token');
-
-    localStorage.setItem('token', TokenParam);
-  }, []);
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -117,29 +122,7 @@ export default function SignIn() {
   
   };
   
-  async function sendRegData(formData){
-    try {
-      const token = localStorage.getItem('token');
-      console.log(token);
-      console.log("Hiii")
-      const response = await axios.post(
-        'http://localhost:4000/api/v1/register',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-  
-      
-      console.log(response.data);
-    } catch (error) {
-    
-      console.error('Error sending registration data:', error.message);
-    }
-  };
+
 
 
   const registerMutation = useMutation({
@@ -156,9 +139,10 @@ export default function SignIn() {
     e.preventDefault();
     registerMutation.mutate(formData);
 
+    
+
     for (const key in formData) {
       if (formData.hasOwnProperty(key) && formData[key].trim() === '') {
-        // If any field is blank, handle the error (e.g., show an alert or console log)
         console.error(`Error: ${key} is blank`);
         toast({
           title: `${key} is Required `,

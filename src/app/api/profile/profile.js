@@ -32,29 +32,29 @@ export async function FetchedData(){
 
 
 
-export async function sendRegData(formData){
-    try {
+export async function sendRegData(formData) {
+  try {
       const token = localStorage.getItem('token');
-      console.log(token);
-  
-      const response = await axios.post(
-        'http://localhost:4000/api/v1/register',
-        formData,
-        {
+
+      const response = await fetch('http://localhost:4000/api/v1/register', {
+          method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
           },
-        }
-      );
-  
-      
-      console.log(response.data);
-    } catch (error) {
-    
+          body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+  } catch (error) {
       console.error('Error sending registration data:', error.message);
-    }
-  };
+  }
+}
 
 
 
