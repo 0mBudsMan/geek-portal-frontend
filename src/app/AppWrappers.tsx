@@ -6,6 +6,7 @@ import 'styles/MiniCalendar.css';
 import { ChakraProvider } from '@chakra-ui/react';
 import { CacheProvider } from '@chakra-ui/next-js';
 import theme from '../theme/theme';
+import { AuthProvider } from 'contexts/AuthContext';
 import {
  
   QueryClient,
@@ -16,12 +17,13 @@ const queryClient = new QueryClient()
 
 export default function AppWrappers({ children }: { children: ReactNode }) {
   return (
+    <AuthProvider>
     <QueryClientProvider client={queryClient}>
 
 
     <CacheProvider>
       <ChakraProvider theme={theme}>{children}</ChakraProvider>{' '}
     </CacheProvider>
-    </QueryClientProvider>
+    </QueryClientProvider></AuthProvider>
   );
 }

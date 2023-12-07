@@ -58,6 +58,12 @@ export default function SignIn() {
     if(TokenParam===null){
       window.location.assign('localhost:3000/auth/sign-in')
     }
+    const avatarUrl = urlParam.get('avatarUrl');
+    setformData({
+      ...formData,
+      avatarUrl: avatarUrl
+    });
+    
 
     localStorage.setItem('token', TokenParam);
   }, []);
@@ -72,7 +78,7 @@ export default function SignIn() {
       const ParseData = JSON.parse(GitDatalocal);
       
     
-      setGitData(ParseData.data);
+      setGitData(ParseData?.data);
     
     }, []);
 
