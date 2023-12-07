@@ -28,10 +28,10 @@ export default function GeneralInformation(props: { [x: string]: any }) {
 			</Text>
 			<SimpleGrid columns={2} gap='20px'>
 				<Information boxShadow={cardShadow} title='Name' value={TempData.name} />
-				<Information boxShadow={cardShadow} title='Github Username' value={TempData.githubUsername} />
-				<Information boxShadow={cardShadow} title='College' value='IIIT Allahabad' />
-				<Information boxShadow={cardShadow} title='Discord ID' value='aksahyww1' />
-				<Information boxShadow={cardShadow} title='Graduation Year' value='2026' />
+				<Information boxShadow={cardShadow} title='Github Username' value={TempData.githubId} />
+				<Information boxShadow={cardShadow} title='College' value={TempData.college} />
+				<Information boxShadow={cardShadow} title='Discord ID' value={TempData.discordId }/>
+				<Information boxShadow={cardShadow} title='Email' value={TempData.email}/>
 				
 			</SimpleGrid>
 		</Card>

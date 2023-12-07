@@ -52,7 +52,7 @@ export default function Banner (props: {
       />
       <NextAvatar
         mx='auto'
-        src={TempData.avatar_url
+        src={TempData.avatarUrl
         }
         h='87px'
         w='87px'
@@ -64,7 +64,7 @@ export default function Banner (props: {
      {TempData.name}
       </Text>
       <Text color={textColorSecondary} fontSize='sm'>
-      {TempData.githubUsername
+      {TempData.githubId
 }
       </Text>
       <Flex w='max-content' mx='auto' mt='26px'>
@@ -73,7 +73,7 @@ export default function Banner (props: {
             {posts}
           </Text>
           <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
-            Merge accepted
+            PR Merged
           </Text>
         </Flex>
         <Flex mx='auto' me='60px' alignItems='center' flexDirection='column'>
@@ -81,8 +81,7 @@ export default function Banner (props: {
             {followers}
           </Text>
           <Text color={textColorSecondary} fontSize='sm' fontWeight='400'>
-            Total Coins
-          </Text>
+Points          </Text>
         </Flex>
         <Flex mx='auto' alignItems='center' flexDirection='column'>
           <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>

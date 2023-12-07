@@ -19,7 +19,7 @@ export default function Projects (props: { [x: string]: any }) {
     const GitDatalocal = localStorage.getItem('GithubData');
     const ParseData = JSON.parse(GitDatalocal);
     setTempData(ParseData.data);
-    setRepos(ParseData.data.repositories
+    setRepos(ParseData.data.PR
 
       )
   }, []);
@@ -57,7 +57,7 @@ export default function Projects (props: { [x: string]: any }) {
         ranking='1'
         language='English'
         link={repo.githubUrl}
-        title={repo.name}
+        title={repo.title}
       />
   ))
 }

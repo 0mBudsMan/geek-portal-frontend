@@ -5,6 +5,10 @@ import {
   CardBody,
 
 } from '@material-tailwind/react';
+import { useState } from 'react';
+import { FetchedData } from 'app/api/profile/profile';
+import { useMutation, useQuery } from '@tanstack/react-query';
+
 import {
   Box,
   useColorModeValue,
@@ -14,11 +18,26 @@ import { use } from 'react';
 import { useEffect } from 'react';
 
 export default function Dashboard() {
+  const [GitData, setGitData] = useState({});
   const auth = useAuth();
   useEffect(() => {
     auth.check_login();
   }, []);
 
+  
+  const { data } = useQuery({
+    queryKey: ['userInfo'],
+    queryFn:FetchedData,
+  
+  });
+    useEffect(() => {
+      const GitDatalocal = localStorage.getItem('GithubData');
+      const ParseData = JSON.parse(GitDatalocal);
+      
+    
+      setGitData(ParseData?.data);
+    
+    }, []);
 
 const brandColor = useColorModeValue('brand.500', 'white');
   const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100');

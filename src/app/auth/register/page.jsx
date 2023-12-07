@@ -35,7 +35,7 @@ import axios from 'axios';
 
 
 export default function SignIn() {
-  const [GitData, setGitData] = useState({});
+ 
   const [gituser, setGitUser] = useState('');
   const [formData, setformData] = useState({
     name: gituser,
@@ -79,19 +79,7 @@ export default function SignIn() {
 
   }, []);
 
-  // const { data } = useQuery({
-  //   queryKey: ['userInfo'],
-  //   queryFn:FetchedData,
-  
-  // });
-    useEffect(() => {
-      const GitDatalocal = localStorage.getItem('GithubData');
-      const ParseData = JSON.parse(GitDatalocal);
-      
-    
-      setGitData(ParseData?.data);
-    
-    }, []);
+ 
 
 
 

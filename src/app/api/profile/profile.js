@@ -7,12 +7,12 @@ export async function FetchedData(){
     }
     
     const response = await fetch(
-      'http://localhost:4000/api/v1/participant/userInfo',
+      'http://localhost:4000/api/v1/participant/',
       {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
         },
       },
     );
@@ -45,9 +45,14 @@ export async function sendRegData(formData) {
           body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+
+      if (response.status === 200) {
+        
+        history.push('/user/home');
+      } else {
+        console.error('Registration failed:', response.statusText);
       }
+    
 
       const data = await response.json();
       console.log(data);
