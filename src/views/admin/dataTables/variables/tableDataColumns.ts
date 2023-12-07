@@ -7,7 +7,7 @@ type RowObj = {
 };
 
 const tableDataColumns: RowObj[] = [
-	{	
+	{		
 		position:1,
 		name: 'Akshay Waghmare',
 		githubid: 'akshayw1',
