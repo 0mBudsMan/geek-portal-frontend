@@ -1,19 +1,4 @@
 
-
-import {FetchedLeaderboard} from '../../../../app/api/leaderboard/leaderboard';
-
-
-const fetchData = async () => {
-    try {
-      const Data = await FetchedLeaderboard();
-      console.log(Data);
-     
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-  
-  fetchData();
   
 
 type RowObj = {
