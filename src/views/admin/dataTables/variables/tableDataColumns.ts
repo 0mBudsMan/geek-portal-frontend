@@ -1,10 +1,32 @@
+
+
+import {FetchedLeaderboard} from '../../../../app/api/leaderboard/leaderboard';
+
+
+const fetchData = async () => {
+    try {
+      const Data = await FetchedLeaderboard();
+      console.log(Data);
+     
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  
+  fetchData();
+  
+
 type RowObj = {
 	position:number;
 	name: string;
 	prmerged: string;
 	githubid: string;
-	points: string; 
+	points: string;
+  avatarUrl: string,
+  prDetailsURL: string
 };
+
+
 
 const tableDataColumns: RowObj[] = [
 	{		
@@ -13,6 +35,8 @@ const tableDataColumns: RowObj[] = [
 		githubid: 'akshayw1',
 		prmerged: '99',
 		points: '232', 
+        avatarUrl: "string",
+        prDetailsURL: "string"
 	},
 	{
 		position:2,
@@ -20,21 +44,19 @@ const tableDataColumns: RowObj[] = [
 		githubid: 'shashankpatil28',
 		prmerged: '77',
 		points: '219', 
+        avatarUrl: "string",
+        prDetailsURL: "string"
 	},
 	{
 		position:3,
-		name: 'Om Buddhadev',
-		githubid: 'ombuddamsn',
-		prmerged: '32',
-		points: '200', 
+		name:'Shashank Patil',
+		githubid: 'shashankpatil28',
+		prmerged: '77',
+		points: '219', 
+        avatarUrl: "string",
+        prDetailsURL: "string"
 	},
-	{
-		position:4,
-		name: 'Bhupendra Jogi',
-		githubid: 'bhupendraJogi',
-		prmerged: '21',
-		points: '199', 
-	}, 
+	
 ];
 
 export default tableDataColumns;

@@ -13,9 +13,9 @@ import {
   getActiveRoute,
   isWindowAvailable
 } from 'utils/navigation'
-import { ThemeProvider, createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme, makeStyles } from '@material-ui/core/styles';
 
-const theme = createMuiTheme();
+const theme = createTheme();
 
 const useStyles = makeStyles((theme) => {
   root: {
