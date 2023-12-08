@@ -5,7 +5,7 @@ Hey there! Its Gh Portal Frontend
 # Routes
 
 ## Auth
-/auth/sign-in : SIGN IN Onboard
+/auth/sign-in : SIGN IN Onboard<br>
 /auth/register : First Time Redirect ( New User)
 
 ## User Side
