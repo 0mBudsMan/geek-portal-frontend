@@ -80,16 +80,14 @@ export default function DataTables() {
             <SimpleGrid columns={{ base: 1, md: 3 }} gap="20px">
               
           {console.log(events.logoUrl)}
-            {events.map((event) => (
+            {events.map((event : any) => (
 
 
         <NFT
         name={event.name}
         des={event.description}
-        
+        key={event.name}
         image={`data:image/png;base64,${event.logoUrl?.data}`}
-
-        
         download={`/user/leaderboard/${event.name}`}
       />
         

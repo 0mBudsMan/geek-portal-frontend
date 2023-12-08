@@ -7,90 +7,54 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import AdminLayout from 'layouts/admin';
 import { useRouter } from 'next/navigation';
-import {FetchedLeaderboard} from '../../../api/leaderboard/leaderboard'
+import { FetchedLeaderboard } from '../../../api/leaderboard/leaderboard';
 import tableDataColumns from 'views/admin/dataTables/variables/tableDataColumns';
+import { RingLoader } from 'react-spinners';
 
-export default function eventName({params}) {
+export default function EventName({ params }: { params: { eventName: string } }) {
+  const eventName = params.eventName;
 
-const eventName = params.eventName;
-  
-  const { data: LeadData } = useQuery({
+  const { data: LeadData, isLoading } = useQuery({
     queryKey: ['LeadInfo'],
-    queryFn:()=> FetchedLeaderboard(eventName),
+    queryFn: () => FetchedLeaderboard(eventName),
   });
 
-  if (!LeadData) {
-    return <div>Error fetching data</div>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <RingLoader color="#36d7b7" />
+      </div>
+    );
   }
 
-  const TableData1 = LeadData;
-console.log(TableData1);
-
   type RowObj = {
-    position:number;
+    position: number;
     name: string;
     prmerged: string;
     githubid: string;
     points: string;
-    avatarUrl: string,
-    prDetailsURL: string
+    avatarUrl: string;
+    prDetailsURL: string;
   };
-  
 
-
-
-  
-  
-  const tableDataColumns: RowObj[] = [
-    {		
-      position:1,
-      name: 'Akshay Waghmare',
-      githubid: 'adsdkshayw1',
-      prmerged: '99',
-      points: '232', 
-          avatarUrl: "string",
-          prDetailsURL: "string"
-    },
-    {		
-      position:2,
-      name: 'Akshay Waghmare',
-      githubid: 'adsdkshayw1',
-      prmerged: '99',
-      points: '232', 
-          avatarUrl: "string",
-          prDetailsURL: "string"
-    },
-    {
-      position:3,
-      name:'Shashank Patil',
-      githubid: 'shashankpatil28',
-      prmerged: '77',
-      points: '219', 
-          avatarUrl: "string",
-          prDetailsURL: "string"
-    },
-    
-  ];
-
-
+  const tableDataColumns: RowObj[] = LeadData.map((item, index) => {
+    return {
+      position: index + 1,
+      name: item.name,
+      prmerged: item.prmerged,
+      githubid: item.githubid,
+      points: item.points,
+      avatarUrl: item.avatarUrl,
+      prDetailsURL: item.prDetailsURL,
+      };
+  }
+  );
 
   return (
-
-
     <Box pt={{ base: '130px', md: '80px', xl: '80px' }}>
-      
-         <ColumnsTable tableData={tableDataColumns} eventName={params.eventName} />
-         <SimpleGrid columns={3} spacing={4}>
-        {LeadData.map((item) => (
-          <div key={item.position}>
-            <p>Name: {item.name}</p>
-            <p>Github ID: {item.githubid}</p>
-            <p>PR Merged: {item.prmerged}</p>
-            <p>Points: {item.points}</p>
-          </div>
-        ))}
+      <ColumnsTable tableData={tableDataColumns} eventName={params.eventName} />
+      <SimpleGrid columns={3} spacing={4}>
       </SimpleGrid>
-         
     </Box>
   );
 }
