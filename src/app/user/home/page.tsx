@@ -72,7 +72,7 @@ const brandColor = useColorModeValue('brand.500', 'white');
     {events.map((event) => (
         <EventCard
           key={event.name}
-          btnStatus="Register"
+          btnStatus={auth.isLoggedIn ? 'Yayy! Registered for opencode' : 'Register'}
           name={event.name}
           des={event.description}
           image=""

@@ -8,6 +8,7 @@ import { Box } from "@chakra-ui/react";
 
 
 
+
 const addevent = () => {
     const [eventData, setEventData] = useState({
         Fullname: "",
@@ -22,6 +23,7 @@ const addevent = () => {
         //console.log(file)
         if(file){
         var reader = new FileReader();
+        alert("UPLAODED")
         reader.onloadend = function () {
            
             
@@ -72,6 +74,30 @@ const addevent = () => {
 
         });
         coverimages = [];
+        const logFormData = (formData) => {
+            for (let pair of formData.entries()) {
+                console.log(pair[0], pair[1]);
+            }
+        };
+        const formData = new FormData();
+        formData.append('title', eventData.Fullname);
+        console.log(eventData.Fullname);
+        
+        formData.append('description', eventData.Description);
+        console.log(eventData.Description);
+        formData.append('startDate', '2023-12-01T00:00:00Z');
+        formData.append('endDate', '2023-12-02T00:00:00Z');
+    
+        // Append cover images
+        coverimages.forEach((coverImage, index) => {
+            formData.append(`coverImages[${index}]`, coverImage);
+        });
+    
+        // Append logo image
+        formData.append('logoImage', logo);
+        logFormData(formData);
+
+
         //storing event details in local storage
        /* if(!localStorage.getItem("eventsArray")){
             var eventsArray = [];
@@ -84,7 +110,7 @@ const addevent = () => {
             localStorage.setItem("eventsArray", JSON.stringify(eventsArray));
             
         }*/
-        const createEvent = async (finalData) => {
+        const createEvent = async (formData) => {
 
             try {
                 
@@ -96,7 +122,7 @@ const addevent = () => {
                   'Content-Type': 'application/json',
                   Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify(finalData),
+                body: formData,
               });
           
               if (!response.ok) {
@@ -104,7 +130,7 @@ const addevent = () => {
               }
           
               const responseData = await response.json();
-              console.log('Event created successfully:', finalData);
+              console.log('Event created successfully:', formData);
               // You can update your UI or perform other actions based on the response
             } catch (error) {
               console.error('Error creating event:', error.message);
